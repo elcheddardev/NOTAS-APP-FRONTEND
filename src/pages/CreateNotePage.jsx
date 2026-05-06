@@ -2,7 +2,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import NoteForm from "../components/NoteForm";
-import { useNavigate } from "react-router-dom";
 console.log(import.meta.env.VITE_APP_URL)
 const CreateNotePage = () => {
   const navigate = useNavigate();
