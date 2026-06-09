@@ -7,10 +7,18 @@ const apiURL = import.meta.env.VITE_APP_URL;
 const HomePage  = () => {
    const [notes, setNotes] = useState([]);
    const [loading, setLoading] = useState(true)
+   const handleDelete = (id) => {
+  setNotes(notes.filter(note => note._id !== id));
+};
    useEffect(() => {
     const fetchData = async () => {
       try {
-      const response = await axios.get(`${apiURL}/api/notes`);
+      const token = localStorage.getItem("token");
+const response = await axios.get(`${apiURL}/api/notes`, {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
       setNotes(response.data);
       setLoading(false);
       console.log(response);
@@ -33,6 +41,7 @@ const HomePage  = () => {
        description={note.description}
        id={note._id}
        date={formatData(note.createdAt)}
+       onDelete={handleDelete}
       />
      ))}
     </div>

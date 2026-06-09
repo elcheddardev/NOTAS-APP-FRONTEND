@@ -8,7 +8,12 @@ const CreateNotePage = () => {
 
   const handleCreate = async (note) => {
     try {
-      const res = await axios.post(`${import.meta.env.VITE_APP_URL}/api/notes`, note);
+      const token = localStorage.getItem("token");
+const res = await axios.post(`${import.meta.env.VITE_APP_URL}/api/notes`, note, {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
 
       if (res.status >= 200 && res.status < 300) {
         toast.success("¡Nota creada con éxito!");
